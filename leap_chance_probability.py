@@ -3,7 +3,7 @@ from itertools import combinations
 # Probabilities for faces 2-8
 probs = [2/8, 1/8, 1/8, 1/8, 1/8, 1/8, 1/8]
 
-# Step 1: Enumerate all 4-combinations of faces
+# Enumerate all 4-combinations of faces
 total_prob = 0
 for combo in combinations(range(7), 4):
     p = 1

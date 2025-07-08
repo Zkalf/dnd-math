@@ -1,7 +1,7 @@
-# roll 4d8 where 1 become 2
 import random
-def roll_dice(number_of_dice, sides, elemental_adept):
-    rolls = [random.randint(1, sides) for _ in range(number_of_dice)]
+
+def roll_dice(dice, sides, elemental_adept):
+    rolls = [random.randint(1, sides) for _ in range(dice)]
     if elemental_adept:
         rolls = [2 if roll == 1 else roll for roll in rolls]
     return rolls
@@ -20,10 +20,10 @@ def main():
     damage = 0
     leaps = 0
     for _ in range(simulations):
-        number_of_dice = 4
+        dice = 3
         sides = 8
         elemental_adept = True
-        rolls = roll_dice(number_of_dice, sides, elemental_adept)
+        rolls = roll_dice(dice, sides, elemental_adept)
         if check_for_pair(rolls):
             leaps += 1
         else:
