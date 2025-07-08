@@ -135,6 +135,25 @@ def empowered_reroll_strategy_keep_decision_tree2(dice_rolls, charisma_modifier,
     # if dice_rolls have 7 or 8 then reroll remaining dice
     if 7 in dice_rolls or 8 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 7 and v != 8][:charisma_modifier]
+    # elif dice_rolls have 6 then reroll remaining dice
+    elif 6 in dice_rolls:
+        reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 6][:charisma_modifier]
+    # else reroll all
+    else:
+        reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
+    for i in reroll_indices:
+        dice_rolls[i] = reroll_damage_dice(elemental_adept)
+    return dice_rolls
+
+def empowered_reroll_strategy_keep_decision_tree3(dice_rolls, charisma_modifier, elemental_adept):
+    if check_for_pair(dice_rolls):
+        return dice_rolls
+    # if dice_rolls have 7 or 8 then reroll remaining dice
+    if 7 in dice_rolls or 8 in dice_rolls:
+        reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 7 and v != 8][:charisma_modifier]
+    # elif dice_rolls have 6 then reroll remaining dice
+    elif 6 in dice_rolls:
+        reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 6][:charisma_modifier]
     # elif dice_rolls have 2 then reroll remaining dice
     elif 2 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 2][:charisma_modifier]
@@ -229,7 +248,9 @@ def main():
                             empowered_reroll_strategy_keep_decision_tree1, "Decision Tree1"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
                             empowered_reroll_strategy_keep_decision_tree2, "Decision Tree2"))
-    
+    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_decision_tree3, "Decision Tree3"))
+
     # Sort results by avg_damage ascending
     results.sort(key=lambda x: x[1], reverse=False)
     # Write markdown table to file
