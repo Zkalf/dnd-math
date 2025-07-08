@@ -1,11 +1,5 @@
 import random
 
-def fake_initial_roll_dice(number_of_dice, sides, elemental_adept):
-    rolls = [8, 7, 6, 2] # Example fixed rolls for testing purposes
-    if elemental_adept:
-        rolls = [2 if roll == 1 else roll for roll in rolls]
-    return rolls
-
 def roll_dice(number_of_dice, sides, elemental_adept):
     rolls = [random.randint(1, sides) for _ in range(number_of_dice)]
     if elemental_adept:
@@ -32,14 +26,6 @@ def empowered_reroll_strategy_all(dice_rolls, charisma_modifier, elemental_adept
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
     return dice_rolls
 
-def empowered_reroll_strategy_all_except_2(dice_rolls, charisma_modifier, elemental_adept):
-    if check_for_pair(dice_rolls):
-        return dice_rolls
-    reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 2][:charisma_modifier]
-    for i in reroll_indices:
-        dice_rolls[i] = reroll_damage_dice(elemental_adept)
-    return dice_rolls
-
 def empowered_reroll_strategy_below_average(dice_rolls, charisma_modifier, elemental_adept):
     if check_for_pair(dice_rolls):
         return dice_rolls
@@ -62,6 +48,14 @@ def empowered_reroll_strategy_never_high(dice_rolls, charisma_modifier, elementa
     if all(v >= 5 for v in dice_rolls):
         return dice_rolls
     reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
+    for i in reroll_indices:
+        dice_rolls[i] = reroll_damage_dice(elemental_adept)
+    return dice_rolls
+
+def empowered_reroll_strategy_keep_2s(dice_rolls, charisma_modifier, elemental_adept):
+    if check_for_pair(dice_rolls):
+        return dice_rolls
+    reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 2][:charisma_modifier]
     for i in reroll_indices:
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
     return dice_rolls
@@ -130,7 +124,9 @@ def chromatic_orb(spell_level, number_of_targets, elemental_adept, charisma_modi
     total_damage = sum(initial_roll)
 
     leaps = 0
+    first_leap_triggered = 0
     if check_for_pair(initial_roll) and number_of_targets > 1:
+        first_leap_triggered = 1
         max_leaps = spell_level
 
         for _ in range(min(max_leaps, number_of_targets - 1)):
@@ -141,27 +137,21 @@ def chromatic_orb(spell_level, number_of_targets, elemental_adept, charisma_modi
             if not check_for_pair(additional_roll):
                 break
 
-    return total_damage, leaps
+    return total_damage, leaps, first_leap_triggered
 
 def run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, reroll_strategy, label):
     print(f"Running {simulations} simulation on {label}")
     damages_list = []
     leaps_list = []
-    first_leap_count = 0
+    first_leap_list = []
     for _ in range(simulations):
-        number_of_damage_dice = 3 + (spell_level - 1)
-        type_of_damage_dice = 8
-        initial_roll = roll_dice(number_of_damage_dice, type_of_damage_dice, elemental_adept)
-        if charisma_modifier > 0 and reroll_strategy:
-            initial_roll = reroll_strategy(initial_roll, charisma_modifier, elemental_adept)
-        if check_for_pair(initial_roll) and number_of_targets > 1:
-            first_leap_count += 1
-        damage, leaps = chromatic_orb(spell_level, number_of_targets, elemental_adept, charisma_modifier, reroll_strategy)
+        damage, leaps, first_leap_triggered = chromatic_orb(spell_level, number_of_targets, elemental_adept, charisma_modifier, reroll_strategy)
         damages_list.append(damage)
         leaps_list.append(leaps)
+        first_leap_list.append(first_leap_triggered)
     avg_damage = sum(damages_list) / simulations
     avg_leaps = sum(leaps_list) / simulations
-    first_leap = first_leap_count / simulations
+    first_leap = sum(first_leap_list) / simulations
     return (label, avg_damage, avg_leaps, first_leap)
 
 def main():
@@ -173,15 +163,12 @@ def main():
     print(f"\nSimulating Chromatic Orb (Spell level {spell_level}, {number_of_targets} targets, {'Elemental Adept' if elemental_adept else 'no Elemental Adept'}, Empowered Spell +{charisma_modifier}):\n")
     results = []
     results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_nothing, "Never reroll any dice"))
-    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_all, "Reroll all dice, if no pair"))
-    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_all_except_2, "Reroll all dice, except 2s, if no pair"))
-    #results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_below_average, "Reroll dice below average (<=4), if no pair"))
-    #results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_below_average_except_2, "Reroll dice below average (<=4), except 2, if no pair"))
-    #results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_never_high, "Never reroll if all dice are high (>=5), if no pair"))
-    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_8s, "Reroll all dice except 8s, if no pair"))
-    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_2s_and_8s, "Reroll all dice except 2s and 8s, if no pair"))
-    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_7s_and_8s, "Reroll all dice except 7s and 8s, if no pair"))
-    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_6s_7s_and_8s, "Reroll all dice except 6s, 7s and 8s, if no pair"))
+    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_all, "If no pair, reroll all dice"))
+    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_2s, "If no pair, keep 2s, reroll remaining"))
+    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_8s, "If no pair, keep 8s, reroll remaining"))
+    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_2s_and_8s, "If no pair, keep 2s and 8s, reroll remaining"))
+    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_7s_and_8s, "If no pair, keep 7s and 8s, reroll remaining"))
+    results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_6s_7s_and_8s, "If no pair, keep 6s, 7s and 8s, reroll remaining"))
     results.append(run_simulation(simulations, spell_level, number_of_targets, elemental_adept, charisma_modifier, empowered_reroll_strategy_keep_decision_tree, "Decision Tree"))
 
     # Sort results by avg_damage ascending
