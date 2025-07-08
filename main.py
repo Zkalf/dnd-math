@@ -296,7 +296,7 @@ def main():
         f.write("| Simulation name | Avg damage | Avg leaps | First leap % | Has pair % | Condition triggered % | Reroll all % |\n")
         f.write("|---|---|---|---|---|---|---|\n")
         for label, avg_damage, avg_leaps, first_leap, tracking in results:
-            f.write(f"| {label} | {avg_damage:.3f} | {avg_leaps:.3f} | {first_leap:.3f} | {tracking['has_pair']:.3f} | {tracking['condition_triggered']:.3f} | {tracking['reroll_all']:.3f} |\n")
+            f.write(f"| {label} | {avg_damage:.2f} | {avg_leaps:.2f} | {first_leap:.2f} | {tracking['has_pair']:.2f} | {tracking['condition_triggered']:.2f} | {tracking['reroll_all']:.2f} |\n")
 
     print("\nResults saved to results.md\n")
 
