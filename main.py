@@ -37,62 +37,77 @@ def empowered_reroll_strategy_all(dice_rolls, charisma_modifier, elemental_adept
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
     return dice_rolls
 
-def empowered_reroll_strategy_keep_2s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_2(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 2 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   2 in dice_rolls, [2])
 
-def empowered_reroll_strategy_keep_7s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_6(dice_rolls, charisma_modifier, elemental_adept):
+    # if dice_rolls have 6 then reroll remaining dice, else reroll all
+    return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
+                                  6 in dice_rolls, [6])
+
+def empowered_reroll_strategy_keep_7(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 7 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   7 in dice_rolls, [7])
 
-def empowered_reroll_strategy_keep_8s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_8(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 8 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   8 in dice_rolls, [8])
 
-def empowered_reroll_strategy_keep_2s_and_8s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_2_and_8(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 2 and 8 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   2 in dice_rolls and 8 in dice_rolls, [2, 8])
 
-def empowered_reroll_strategy_keep_2s_or_8s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_2_or_8(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 2 or 8 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   2 in dice_rolls or 8 in dice_rolls, [2, 8])
 
-def empowered_reroll_strategy_keep_7s_and_8s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_7_and_8(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 7 and 8 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   7 in dice_rolls and 8 in dice_rolls, [7, 8])
 
-def empowered_reroll_strategy_keep_7s_or_8s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_7_or_8(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 7 or 8 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   7 in dice_rolls or 8 in dice_rolls, [7, 8])
 
-def empowered_reroll_strategy_keep_6s_and_7s_and_8s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_2_and_7_and_8(dice_rolls, charisma_modifier, elemental_adept):
+    # if dice_rolls have 2, 7 and 8 then reroll remaining dice, else reroll all
+    return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
+                                  2 in dice_rolls and 7 in dice_rolls and 8 in dice_rolls, [2, 7, 8])
+
+def empowered_reroll_strategy_keep_2_or_7_or_8(dice_rolls, charisma_modifier, elemental_adept):
+    # if dice_rolls have 2, 7 or 8 then reroll remaining dice, else reroll all
+    return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
+                                  2 in dice_rolls or 7 in dice_rolls or 8 in dice_rolls, [2, 7, 8])
+
+def empowered_reroll_strategy_keep_6_and_7_and_8(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 6, 7 and 8 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   6 in dice_rolls and 7 in dice_rolls and 8 in dice_rolls, [6, 7, 8])
 
-def empowered_reroll_strategy_keep_6s_or_7s_or_8s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_6_or_7_or_8(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 6, 7 or 8 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   6 in dice_rolls or 7 in dice_rolls or 8 in dice_rolls, [6, 7, 8])
 
-def empowered_reroll_strategy_keep_5s_and_6s_and_7s_and_8s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_5_and_6_and_7_and_8(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 5, 6, 7 and 8 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   5 in dice_rolls and 6 in dice_rolls and 7 in dice_rolls and 8 in dice_rolls, [5, 6, 7, 8])
 
-def empowered_reroll_strategy_keep_5s_or_6s_or_7s_or_8s(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_5_or_6_or_7_or_8(dice_rolls, charisma_modifier, elemental_adept):
     # if dice_rolls have 5, 6, 7 or 8 then reroll remaining dice, else reroll all
     return empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, 
                                   5 in dice_rolls or 6 in dice_rolls or 7 in dice_rolls or 8 in dice_rolls, [5, 6, 7, 8])
 
-def empowered_reroll_strategy_keep_decision_tree(dice_rolls, charisma_modifier, elemental_adept):
+def empowered_reroll_strategy_keep_decision_tree1(dice_rolls, charisma_modifier, elemental_adept):
     if check_for_pair(dice_rolls):
         return dice_rolls
     # if dice_rolls have 7 and 8 then reroll remaining dice
@@ -104,6 +119,22 @@ def empowered_reroll_strategy_keep_decision_tree(dice_rolls, charisma_modifier, 
     # elif dice_rolls have 8 then reroll remaining dice
     elif 8 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 8][:charisma_modifier]
+    # elif dice_rolls have 2 then reroll remaining dice
+    elif 2 in dice_rolls:
+        reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 2][:charisma_modifier]
+    # else reroll all
+    else:
+        reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
+    for i in reroll_indices:
+        dice_rolls[i] = reroll_damage_dice(elemental_adept)
+    return dice_rolls
+
+def empowered_reroll_strategy_keep_decision_tree2(dice_rolls, charisma_modifier, elemental_adept):
+    if check_for_pair(dice_rolls):
+        return dice_rolls
+    # if dice_rolls have 7 or 8 then reroll remaining dice
+    if 7 in dice_rolls or 8 in dice_rolls:
+        reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 7 and v != 8][:charisma_modifier]
     # elif dice_rolls have 2 then reroll remaining dice
     elif 2 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 2][:charisma_modifier]
@@ -167,29 +198,37 @@ def main():
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
                             empowered_reroll_strategy_all, "Reroll all"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_2s, "Keep 2"))
+                            empowered_reroll_strategy_keep_2, "Keep 2"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_7s, "Keep 7"))
+                            empowered_reroll_strategy_keep_6, "Keep 6"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_8s, "Keep 8"))
+                            empowered_reroll_strategy_keep_7, "Keep 7"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_2s_and_8s, "Keep 2 and 8"))
+                            empowered_reroll_strategy_keep_8, "Keep 8"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_2s_or_8s, "Keep 2 or 8"))
+                            empowered_reroll_strategy_keep_2_and_8, "Keep 2 and 8"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_7s_and_8s, "Keep 7 and 8"))
+                            empowered_reroll_strategy_keep_2_or_8, "Keep 2 or 8"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_7s_or_8s, "Keep 7 or 8"))
+                            empowered_reroll_strategy_keep_7_and_8, "Keep 7 and 8"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_6s_and_7s_and_8s, "Keep 6 and 7 and 8"))
+                            empowered_reroll_strategy_keep_7_or_8, "Keep 7 or 8"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_6s_or_7s_or_8s, "Keep 6 or 7 or 8"))
+                            empowered_reroll_strategy_keep_2_and_7_and_8, "Keep 2 and 7 and 8"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_5s_and_6s_and_7s_and_8s, "Keep 5 and 6 and 7 and 8"))
+                            empowered_reroll_strategy_keep_2_or_7_or_8, "Keep 2 or 7 or 8"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_5s_or_6s_or_7s_or_8s, "Keep 5 or 6 or 7 or 8"))
+                            empowered_reroll_strategy_keep_6_and_7_and_8, "Keep 6 and 7 and 8"))
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_decision_tree, "Decision Tree"))
+                            empowered_reroll_strategy_keep_6_or_7_or_8, "Keep 6 or 7 or 8"))
+    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_5_and_6_and_7_and_8, "Keep 5 and 6 and 7 and 8"))
+    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_5_or_6_or_7_or_8, "Keep 5 or 6 or 7 or 8"))
+    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_decision_tree1, "Decision Tree1"))
+    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_decision_tree2, "Decision Tree2"))
     
     # Sort results by avg_damage ascending
     results.sort(key=lambda x: x[1], reverse=False)
