@@ -259,7 +259,7 @@ def simulate(simulations, spell_level, targets, elemental_adept, charisma_modifi
     return (label, avg_damage, avg_leaps, first_leap, tracking_percentages, conditional_averages)
 
 def main():
-    simulations = 100000
+    simulations = 1000000
     spell_level = 2
     targets = spell_level + 1
     elemental_adept = True
@@ -301,8 +301,8 @@ def main():
     results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
                             empowered_reroll_strategy_keep_decision_tree3, "Decision Tree3"))
 
-    # Sort results by avg_damage ascending
-    results.sort(key=lambda x: x[1], reverse=False)
+    # Sort results by Condition dmg ascending
+    results.sort(key=lambda x: x[5]['condition_avg'], reverse=False)
     # Write markdown table to file
     with open("results.md", "w", encoding="utf-8") as f:
         f.write(f"Simulating Chromatic Orb (Spell level {spell_level}, on {targets} targets, {'Elemental Adept' if elemental_adept else 'no Elemental Adept'}, Empowered Spell +{charisma_modifier}).\n\n")
