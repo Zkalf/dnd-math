@@ -1,3 +1,4 @@
+import json
 import random
 
 def roll_damage_dice(dice, sides, elemental_adept):
@@ -275,6 +276,11 @@ def simulate(simulations, spell_level, targets, elemental_adept, charisma_modifi
         "condition": [],
         "reroll_all": []
     }
+    tracking_leaps = {
+        "pair": [],
+        "condition": [],
+        "reroll_all": []
+    }
     
     for _ in range(simulations):
         damage, leaps, first_leap, tracking = chromatic_orb(spell_level, targets, elemental_adept, charisma_modifier, reroll_strategy)
@@ -286,12 +292,15 @@ def simulate(simulations, spell_level, targets, elemental_adept, charisma_modifi
             if tracking["pair"]:
                 tracking_occurrence["pair"] += 1
                 tracking_damage["pair"].append(damage)
+                tracking_leaps["pair"].append(leaps)
             if tracking["condition"]:
                 tracking_occurrence["condition"] += 1
                 tracking_damage["condition"].append(damage)
+                tracking_leaps["condition"].append(leaps)
             if tracking["reroll_all"]:
                 tracking_occurrence["reroll_all"] += 1
                 tracking_damage["reroll_all"].append(damage)
+                tracking_leaps["reroll_all"].append(leaps)
     
     avg_damage = sum(damages_list) / simulations
     avg_leaps = sum(leaps_list) / simulations
@@ -307,11 +316,16 @@ def simulate(simulations, spell_level, targets, elemental_adept, charisma_modifi
         "condition_avg": sum(tracking_damage["condition"]) / len(tracking_damage["condition"]) if tracking_damage["condition"] else 0,
         "reroll_all_avg": sum(tracking_damage["reroll_all"]) / len(tracking_damage["reroll_all"]) if tracking_damage["reroll_all"] else 0
     }
+    tracking_avg_leaps = {
+        "pair_avg": sum(tracking_leaps["pair"]) / len(tracking_leaps["pair"]) if tracking_leaps["pair"] else 0,
+        "condition_avg": sum(tracking_leaps["condition"]) / len(tracking_leaps["condition"]) if tracking_leaps["condition"] else 0,
+        "reroll_all_avg": sum(tracking_leaps["reroll_all"]) / len(tracking_leaps["reroll_all"]) if tracking_leaps["reroll_all"] else 0
+    }
     
-    return (label, avg_damage, avg_leaps, first_leap, tracking_rate, tracking_avg_damage)
+    return (label, avg_damage, avg_leaps, first_leap, tracking_rate, tracking_avg_damage, tracking_avg_leaps)
 
 def main():
-    simulations = 10000
+    simulations = 100000
     spell_level = 2
     targets = spell_level + 1
     elemental_adept = True
@@ -371,21 +385,25 @@ def main():
 
         # Simple Strategies Table
         f.write("## Simple Strategies (sorted by condition damage ascending)\n\n")
-        f.write("| Simulation name | Avg damage | Avg leaps | First leap % | Pair % | Condition % | Reroll all % | Pair dmg | Condition dmg |\n")
+        f.write("| Simulation name | Avg damage | Avg leaps | First leap % | Pair % | Condition % | Reroll all % | Avg condition damage | Avg condition leaps |\n")
         f.write("|---|---|---|---|---|---|---|---|---|\n")
-        for label, avg_damage, avg_leaps, first_leap, tracking_rate, tracking_avg_damage in simple_strategies:
-            f.write(f"| {label} | {avg_damage:.2f} | {avg_leaps:.2f} | {first_leap:.2f} | {tracking_rate['pair']:.2f} | {tracking_rate['condition']:.2f} | {tracking_rate['reroll_all']:.2f} | {tracking_avg_damage['pair_avg']:.2f} | {tracking_avg_damage['condition_avg']:.2f} |\n")
+        for label, avg_damage, avg_leaps, first_leap, tracking_rate, tracking_avg_damage, tracking_avg_leaps in simple_strategies:
+            f.write(f"| {label} | {avg_damage:.2f} | {avg_leaps:.2f} | {first_leap:.2f} | {tracking_rate['pair']:.2f} | {tracking_rate['condition']:.2f} | {tracking_rate['reroll_all']:.2f} | {tracking_avg_damage['condition_avg']:.2f} | {tracking_avg_leaps['condition_avg']:.2f} |\n")
         
         f.write("\n")
         
         # Decision Tree Strategies Table
         f.write("## Decision Tree Strategies (sorted by average damage ascending)\n\n")
-        f.write("| Simulation name | Avg damage | Avg leaps | First leap % | Pair % | Condition % | Reroll all % | Pair dmg | Condition dmg |\n")
+        f.write("| Simulation name | Avg damage | Avg leaps | First leap % | Pair % | Condition % | Reroll all % | Avg condition damage | Avg condition leaps |\n")
         f.write("|---|---|---|---|---|---|---|---|---|\n")
-        for label, avg_damage, avg_leaps, first_leap, tracking_rate, tracking_avg_damage in decision_tree_strategies:
-            f.write(f"| {label} | {avg_damage:.2f} | {avg_leaps:.2f} | {first_leap:.2f} | {tracking_rate['pair']:.2f} | {tracking_rate['condition']:.2f} | {tracking_rate['reroll_all']:.2f} | {tracking_avg_damage['pair_avg']:.2f} | {tracking_avg_damage['condition_avg']:.2f} |\n")
+        for label, avg_damage, avg_leaps, first_leap, tracking_rate, tracking_avg_damage, tracking_avg_leaps in decision_tree_strategies:
+            f.write(f"| {label} | {avg_damage:.2f} | {avg_leaps:.2f} | {first_leap:.2f} | {tracking_rate['pair']:.2f} | {tracking_rate['condition']:.2f} | {tracking_rate['reroll_all']:.2f} | {tracking_avg_damage['condition_avg']:.2f} | {tracking_avg_leaps['condition_avg']:.2f} |\n")
 
-    print("\nResults saved to results.md\n")
+    with open("results.json", "w", encoding="utf-8") as f:
+        json.dump({"simple_strategies": simple_strategies, "decision_tree_strategies": decision_tree_strategies}, f, ensure_ascii=False, indent=4)
+
+    print("\nResults saved to results.md")
+    print("Results saved to results.json\n")
 
 if __name__ == "__main__":
     main()
