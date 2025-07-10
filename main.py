@@ -419,11 +419,6 @@ def main():
     decision_tree_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
                                              reroll_strategy_keep_decision_tree5, "Decision Tree5", spell_attack_bonus, armor_class))
     
-    # Sort simple strategies by strategy_avg_damage ascending
-    simple_strategies.sort(key=lambda x: x[7]["strategy_avg_damage"], reverse=False)
-    # Sort decision tree strategies by avg_damage ascending
-    decision_tree_strategies.sort(key=lambda x: x[1], reverse=False)
-    
     with open("results.md", "w", encoding="utf-8") as f:
         f.write("# Simulating Chromatic Orb\n")
 
@@ -445,6 +440,7 @@ def main():
 
         # Simple Strategies Table
         f.write("## Simple Strategies (sorted by 'Strategy condition avg damage' ascending)\n\n")
+        simple_strategies.sort(key=lambda x: x[7]["strategy_avg_damage"], reverse=False)
         f.write("| Strategy | Avg damage | Avg leaps | Pair condition % | Strategy condition % | Reroll all condition % | Strategy condition avg damage | Strategy condition avg leaps |\n")
         f.write("|---|---|---|---|---|---|---|---|\n")
         for label, avg_damage, avg_leaps, first_leap, hit_rate, crit_rate, conditions_rate, conditions_avg_damage, conditions_avg_leaps in simple_strategies:
@@ -454,6 +450,7 @@ def main():
         
         # Decision Tree Strategies Table
         f.write("## Decision Tree Strategies (sorted by 'Avg damage' ascending)\n\n")
+        decision_tree_strategies.sort(key=lambda x: x[1], reverse=False)
         f.write("| Strategy | Avg damage | Avg leaps | Pair condition % | Strategy condition % | Reroll all condition % | Strategy condition avg damage | Strategy condition avg leaps |\n")
         f.write("|---|---|---|---|---|---|---|---|\n")
         for label, avg_damage, avg_leaps, first_leap, hit_rate, crit_rate, conditions_rate, conditions_avg_damage, conditions_avg_leaps in decision_tree_strategies:
