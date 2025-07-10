@@ -17,26 +17,26 @@ def reroll_damage_dice(elemental_adept):
 
 def empowered_reroll_strategy_none(dice_rolls, charisma_modifier, elemental_adept):
     if check_for_pair(dice_rolls):
-        return dice_rolls, {"has_pair": True, "condition": False, "reroll_all": False}
-    return dice_rolls, {"has_pair": False, "condition": False, "reroll_all": False}
+        return dice_rolls, {"pair": True, "condition": False, "reroll_all": False}
+    return dice_rolls, {"pair": False, "condition": False, "reroll_all": False}
 
 def empowered_reroll_strategy_all(dice_rolls, charisma_modifier, elemental_adept):
     if check_for_pair(dice_rolls):
-        return dice_rolls, {"has_pair": True, "condition": False, "reroll_all": False}
+        return dice_rolls, {"pair": True, "condition": False, "reroll_all": False}
     reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
     for i in reroll_indices:
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
-    return dice_rolls, {"has_pair": False, "condition": True, "reroll_all": True}
+    return dice_rolls, {"pair": False, "condition": True, "reroll_all": True}
 
 def empowered_reroll_keep(dice_rolls, charisma_modifier, elemental_adept, keep_condition, keep_values):
     if check_for_pair(dice_rolls):
-        return dice_rolls, {"has_pair": True, "condition": False, "reroll_all": False}
+        return dice_rolls, {"pair": True, "condition": False, "reroll_all": False}
     if keep_condition:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v not in keep_values][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False}
+        tracking = {"pair": False, "condition": True, "reroll_all": False}
     else:
         reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
-        tracking = {"has_pair": False, "condition": False, "reroll_all": True}
+        tracking = {"pair": False, "condition": False, "reroll_all": True}
     
     for i in reroll_indices:
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
@@ -104,28 +104,28 @@ def empowered_reroll_strategy_keep_6_or_7_or_8(dice_rolls, charisma_modifier, el
 
 def empowered_reroll_strategy_keep_decision_tree1(dice_rolls, charisma_modifier, elemental_adept):
     if check_for_pair(dice_rolls):
-        return dice_rolls, {"has_pair": True, "condition": False, "reroll_all": False}
+        return dice_rolls, {"pair": True, "condition": False, "reroll_all": False}
     
     # if dice_rolls have 7 and 8 then reroll remaining dice
     if 7 in dice_rolls and 8 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 7 and v != 8][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "7_and_8"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "7_and_8"}
     # elif dice_rolls have 2 and 8 then reroll remaining dice
     elif 2 in dice_rolls and 8 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 2 and v != 8][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "2_and_8"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "2_and_8"}
     # elif dice_rolls have 8 then reroll remaining dice
     elif 8 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 8][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "8"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "8"}
     # elif dice_rolls have 2 then reroll remaining dice
     elif 2 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 2][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "2"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "2"}
     # else reroll all
     else:
         reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
-        tracking = {"has_pair": False, "condition": False, "reroll_all": True}
+        tracking = {"pair": False, "condition": False, "reroll_all": True}
     
     for i in reroll_indices:
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
@@ -133,20 +133,20 @@ def empowered_reroll_strategy_keep_decision_tree1(dice_rolls, charisma_modifier,
 
 def empowered_reroll_strategy_keep_decision_tree2(dice_rolls, charisma_modifier, elemental_adept):
     if check_for_pair(dice_rolls):
-        return dice_rolls, {"has_pair": True, "condition": False, "reroll_all": False}
+        return dice_rolls, {"pair": True, "condition": False, "reroll_all": False}
     
     # if dice_rolls have 7 or 8 then reroll remaining dice
     if 7 in dice_rolls or 8 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 7 and v != 8][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "7_or_8"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "7_or_8"}
     # elif dice_rolls have 6 then reroll remaining dice
     elif 6 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 6][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "6"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "6"}
     # else reroll all
     else:
         reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
-        tracking = {"has_pair": False, "condition": False, "reroll_all": True}
+        tracking = {"pair": False, "condition": False, "reroll_all": True}
     
     for i in reroll_indices:
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
@@ -154,94 +154,81 @@ def empowered_reroll_strategy_keep_decision_tree2(dice_rolls, charisma_modifier,
 
 def empowered_reroll_strategy_keep_decision_tree3(dice_rolls, charisma_modifier, elemental_adept):
     if check_for_pair(dice_rolls):
-        return dice_rolls, {"has_pair": True, "condition": False, "reroll_all": False}
+        return dice_rolls, {"pair": True, "condition": False, "reroll_all": False}
     
     # if dice_rolls have 7 or 8 then reroll remaining dice
     if 7 in dice_rolls or 8 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 7 and v != 8][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "7_or_8"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "7_or_8"}
     # elif dice_rolls have 6 then reroll remaining dice
     elif 6 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 6][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "6"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "6"}
     # elif dice_rolls have 2 then reroll remaining dice
     elif 2 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 2][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "2"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "2"}
     # else reroll all
     else:
         reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
-        tracking = {"has_pair": False, "condition": False, "reroll_all": True}
+        tracking = {"pair": False, "condition": False, "reroll_all": True}
     
     for i in reroll_indices:
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
     return dice_rolls, tracking
 
 def empowered_reroll_strategy_keep_decision_tree4(dice_rolls, charisma_modifier, elemental_adept):
-    """
-    Optimized decision tree based on analysis of best performing strategies:
-    - Prioritize keeping 8s (highest individual value)
-    - Then 7s (second highest) 
-    - Then 6s (above average)
-    - Fallback to reroll all
-    """
     if check_for_pair(dice_rolls):
-        return dice_rolls, {"has_pair": True, "condition": False, "reroll_all": False}
+        return dice_rolls, {"pair": True, "condition": False, "reroll_all": False}
     
     # Priority 1: If we have 8, always keep it (and any 7s too for maximum value)
     if 8 in dice_rolls:
         if 7 in dice_rolls:
             # Keep both 7s and 8s
             reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 7 and v != 8][:charisma_modifier]
-            tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "8_and_7"}
+            tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "8_and_7"}
         else:
             # Keep just 8s
             reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 8][:charisma_modifier]
-            tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "8"}
+            tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "8"}
     
     # Priority 2: If we have 7 (but no 8), keep it
     elif 7 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 7][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "7"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "7"}
     
     # Priority 3: If we have 6 (but no 7 or 8), keep it
     elif 6 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 6][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "6"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "6"}
     
     # Fallback: Reroll all lowest dice
     else:
         reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
-        tracking = {"has_pair": False, "condition": False, "reroll_all": True}
+        tracking = {"pair": False, "condition": False, "reroll_all": True}
     
     for i in reroll_indices:
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
     return dice_rolls, tracking
 
 def empowered_reroll_strategy_keep_decision_tree5(dice_rolls, charisma_modifier, elemental_adept):
-    """
-    Super optimized tree based on Decision Tree2 logic but refined:
-    - Keep 7s AND 8s together (highest priority)  
-    - Keep 6s only if no 7s or 8s (like Decision Tree2)
-    - Minimal fallback to reroll all
-    """
     if check_for_pair(dice_rolls):
-        return dice_rolls, {"has_pair": True, "condition": False, "reroll_all": False}
+        return dice_rolls, {"pair": True, "condition": False, "reroll_all": False}
     
     # Priority 1: If we have 7 or 8, keep both types (like Decision Tree2)
     if 7 in dice_rolls or 8 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 7 and v != 8][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "7_or_8"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "7_or_8"}
     
     # Priority 2: If we have 6 (but no 7 or 8), keep it (like Decision Tree2)
     elif 6 in dice_rolls:
         reroll_indices = [i for i, v in enumerate(dice_rolls) if v != 6][:charisma_modifier]
-        tracking = {"has_pair": False, "condition": True, "reroll_all": False, "condition": "6"}
+        tracking = {"pair": False, "condition": True, "reroll_all": False, "condition": "6"}
     
     # Fallback: Reroll all lowest dice (minimal occurrence)
     else:
         reroll_indices = sorted(range(len(dice_rolls)), key=lambda i: dice_rolls[i])[:charisma_modifier]
-        tracking = {"has_pair": False, "condition": False, "reroll_all": True}
+        tracking = {"pair": False, "condition": False, "reroll_all": True}
     
     for i in reroll_indices:
         dice_rolls[i] = reroll_damage_dice(elemental_adept)
@@ -252,9 +239,9 @@ def chromatic_orb(spell_level, targets, elemental_adept, charisma_modifier, rero
     sides = 8
 
     initial_roll = roll_damage_dice(dice, sides, elemental_adept)
-    tracking_info = None
+    tracking = None
     if charisma_modifier > 0 and reroll_strategy:
-        initial_roll, tracking_info = reroll_strategy(initial_roll, charisma_modifier, elemental_adept)
+        initial_roll, tracking = reroll_strategy(initial_roll, charisma_modifier, elemental_adept)
     total_damage = sum(initial_roll)
 
     leaps = 0
@@ -271,22 +258,20 @@ def chromatic_orb(spell_level, targets, elemental_adept, charisma_modifier, rero
             if not check_for_pair(additional_roll):
                 break
 
-    return total_damage, leaps, first_leap_triggered, tracking_info
+    return total_damage, leaps, first_leap_triggered, tracking
 
 def simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, reroll_strategy, label):
     print(f"Running {simulations} simulation on {label}")
     damages_list = []
     leaps_list = []
     first_leap_list = []
-    tracking_stats = {
-        "has_pair": 0,
+    tracking_occurrence = {
+        "pair": 0,
         "condition": 0,
         "reroll_all": 0
     }
-    
-    # Track damage by condition type
-    condition_damages = {
-        "has_pair": [],
+    tracking_damage = {
+        "pair": [],
         "condition": [],
         "reroll_all": []
     }
@@ -298,123 +283,107 @@ def simulate(simulations, spell_level, targets, elemental_adept, charisma_modifi
         first_leap_list.append(first_leap)
         
         if tracking:
-            if tracking["has_pair"]:
-                tracking_stats["has_pair"] += 1
-                condition_damages["has_pair"].append(damage)
-            elif tracking["condition"]:
-                tracking_stats["condition"] += 1
-                condition_damages["condition"].append(damage)
-            elif tracking["reroll_all"]:
-                tracking_stats["reroll_all"] += 1
-                condition_damages["reroll_all"].append(damage)
+            if tracking["pair"]:
+                tracking_occurrence["pair"] += 1
+                tracking_damage["pair"].append(damage)
+            if tracking["condition"]:
+                tracking_occurrence["condition"] += 1
+                tracking_damage["condition"].append(damage)
+            if tracking["reroll_all"]:
+                tracking_occurrence["reroll_all"] += 1
+                tracking_damage["reroll_all"].append(damage)
     
     avg_damage = sum(damages_list) / simulations
     avg_leaps = sum(leaps_list) / simulations
     first_leap = sum(first_leap_list) / simulations
     
-    # Convert tracking stats to percentages and calculate conditional averages
-    tracking_percentages = {
-        "has_pair": tracking_stats["has_pair"] / simulations,
-        "condition": tracking_stats["condition"] / simulations,
-        "reroll_all": tracking_stats["reroll_all"] / simulations
+    tracking_rate = {
+        "pair": tracking_occurrence["pair"] / simulations,
+        "condition": tracking_occurrence["condition"] / simulations,
+        "reroll_all": tracking_occurrence["reroll_all"] / simulations
+    }
+    tracking_avg_damage = {
+        "pair_avg": sum(tracking_damage["pair"]) / len(tracking_damage["pair"]) if tracking_damage["pair"] else 0,
+        "condition_avg": sum(tracking_damage["condition"]) / len(tracking_damage["condition"]) if tracking_damage["condition"] else 0,
+        "reroll_all_avg": sum(tracking_damage["reroll_all"]) / len(tracking_damage["reroll_all"]) if tracking_damage["reroll_all"] else 0
     }
     
-    # Calculate average damage for each condition type
-    conditional_averages = {
-        "has_pair_avg": sum(condition_damages["has_pair"]) / len(condition_damages["has_pair"]) if condition_damages["has_pair"] else 0,
-        "condition_avg": sum(condition_damages["condition"]) / len(condition_damages["condition"]) if condition_damages["condition"] else 0,
-        "reroll_all_avg": sum(condition_damages["reroll_all"]) / len(condition_damages["reroll_all"]) if condition_damages["reroll_all"] else 0
-    }
-    
-    return (label, avg_damage, avg_leaps, first_leap, tracking_percentages, conditional_averages)
+    return (label, avg_damage, avg_leaps, first_leap, tracking_rate, tracking_avg_damage)
 
 def main():
-    simulations = 2000000
+    simulations = 10000
     spell_level = 2
     targets = spell_level + 1
     elemental_adept = True
     charisma_modifier = 4
-    print(f"\nSimulating {simulations} Chromatic Orb (Spell level {spell_level}, {targets} targets, {'Elemental Adept' if elemental_adept else 'no Elemental Adept'}, Empowered Spell +{charisma_modifier}):\n")
-    results = []
-    # Test all strategies including our optimized trees
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_none, "Reroll none"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_all, "Reroll all"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_2, "Keep 2"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_6, "Keep 6"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_7, "Keep 7"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_8, "Keep 8"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_2_and_8, "Keep 2 and 8"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_2_or_8, "Keep 2 or 8"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_7_and_8, "Keep 7 and 8"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_7_or_8, "Keep 7 or 8"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_2_and_7_and_8, "Keep 2 and 7 and 8"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_2_or_7_or_8, "Keep 2 or 7 or 8"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_6_and_7_and_8, "Keep 6 and 7 and 8"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_6_or_7_or_8, "Keep 6 or 7 or 8"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_decision_tree1, "Decision Tree1"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_decision_tree2, "Decision Tree2"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_decision_tree3, "Decision Tree3"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_decision_tree4, "Decision Tree4"))
-    results.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
-                            empowered_reroll_strategy_keep_decision_tree5, "Decision Tree5"))
 
-    # Separate simple strategies and decision tree strategies
-    simple_strategies = []
-    decision_tree_strategies = []
+    print(f"\nSimulating {simulations} Chromatic Orb (Spell level {spell_level}, {targets} targets, {'Elemental Adept' if elemental_adept else 'no Elemental Adept'}, Empowered Spell +{charisma_modifier}):\n")
     
-    for result in results:
-        label = result[0]
-        if "Decision Tree" in label or "Optimized Tree" in label or "Super Optimized Tree" in label:
-            decision_tree_strategies.append(result)
-        else:
-            simple_strategies.append(result)
+    simple_strategies = []
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_none, "Reroll none"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_all, "Reroll all"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_2, "Keep 2"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_6, "Keep 6"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_7, "Keep 7"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_8, "Keep 8"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_2_and_8, "Keep 2 and 8"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_2_or_8, "Keep 2 or 8"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_7_and_8, "Keep 7 and 8"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_7_or_8, "Keep 7 or 8"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_2_and_7_and_8, "Keep 2 and 7 and 8"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_2_or_7_or_8, "Keep 2 or 7 or 8"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_6_and_7_and_8, "Keep 6 and 7 and 8"))
+    simple_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_6_or_7_or_8, "Keep 6 or 7 or 8"))
+    
+    decision_tree_strategies = []
+    decision_tree_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_decision_tree1, "Decision Tree1"))
+    decision_tree_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_decision_tree2, "Decision Tree2"))
+    decision_tree_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_decision_tree3, "Decision Tree3"))
+    decision_tree_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_decision_tree4, "Decision Tree4"))
+    decision_tree_strategies.append(simulate(simulations, spell_level, targets, elemental_adept, charisma_modifier, 
+                            empowered_reroll_strategy_keep_decision_tree5, "Decision Tree5"))
     
     # Sort simple strategies by condition_avg ascending
     simple_strategies.sort(key=lambda x: x[5]['condition_avg'], reverse=False)
     # Sort decision tree strategies by avg_damage ascending
     decision_tree_strategies.sort(key=lambda x: x[1], reverse=False)
     
-    # Write markdown table to file
     with open("results.md", "w", encoding="utf-8") as f:
-        f.write(f"Simulating Chromatic Orb (Spell level {spell_level}, on {targets} targets, {'Elemental Adept' if elemental_adept else 'no Elemental Adept'}, Empowered Spell +{charisma_modifier}).\n\n")
-        f.write("For all strategies:\n\n")
-        f.write("- if has pair -> skip reroll\n")
-        f.write("- if condition triggered -> keep specific dice and reroll remaining\n")
-        f.write("- else -> reroll all lowest dice\n\n")
-        
+        f.write(f"# Simulating Chromatic Orb (Spell level {spell_level}, on {targets} targets, {'Elemental Adept' if elemental_adept else 'no Elemental Adept'}, Empowered Spell +{charisma_modifier})\n\n")
+
         # Simple Strategies Table
         f.write("## Simple Strategies (sorted by condition damage ascending)\n\n")
-        f.write("| Simulation name | Avg damage | Avg leaps | First leap % | Has pair % | Condition % | Reroll all % | Pair dmg | Condition dmg | Reroll dmg |\n")
-        f.write("|---|---|---|---|---|---|---|---|---|---|\n")
-        for label, avg_damage, avg_leaps, first_leap, tracking, conditional_avg in simple_strategies:
-            f.write(f"| {label} | {avg_damage:.2f} | {avg_leaps:.2f} | {first_leap:.2f} | {tracking['has_pair']:.2f} | {tracking['condition']:.2f} | {tracking['reroll_all']:.2f} | {conditional_avg['has_pair_avg']:.2f} | {conditional_avg['condition_avg']:.2f} | {conditional_avg['reroll_all_avg']:.2f} |\n")
+        f.write("| Simulation name | Avg damage | Avg leaps | First leap % | Pair % | Condition % | Reroll all % | Pair dmg | Condition dmg |\n")
+        f.write("|---|---|---|---|---|---|---|---|---|\n")
+        for label, avg_damage, avg_leaps, first_leap, tracking_rate, tracking_avg_damage in simple_strategies:
+            f.write(f"| {label} | {avg_damage:.2f} | {avg_leaps:.2f} | {first_leap:.2f} | {tracking_rate['pair']:.2f} | {tracking_rate['condition']:.2f} | {tracking_rate['reroll_all']:.2f} | {tracking_avg_damage['pair_avg']:.2f} | {tracking_avg_damage['condition_avg']:.2f} |\n")
         
         f.write("\n")
         
         # Decision Tree Strategies Table
         f.write("## Decision Tree Strategies (sorted by average damage ascending)\n\n")
-        f.write("| Simulation name | Avg damage | Avg leaps | First leap % | Has pair % | Condition % | Reroll all % | Pair dmg | Condition dmg | Reroll dmg |\n")
-        f.write("|---|---|---|---|---|---|---|---|---|---|\n")
-        for label, avg_damage, avg_leaps, first_leap, tracking, conditional_avg in decision_tree_strategies:
-            f.write(f"| {label} | {avg_damage:.2f} | {avg_leaps:.2f} | {first_leap:.2f} | {tracking['has_pair']:.2f} | {tracking['condition']:.2f} | {tracking['reroll_all']:.2f} | {conditional_avg['has_pair_avg']:.2f} | {conditional_avg['condition_avg']:.2f} | {conditional_avg['reroll_all_avg']:.2f} |\n")
+        f.write("| Simulation name | Avg damage | Avg leaps | First leap % | Pair % | Condition % | Reroll all % | Pair dmg | Condition dmg |\n")
+        f.write("|---|---|---|---|---|---|---|---|---|\n")
+        for label, avg_damage, avg_leaps, first_leap, tracking_rate, tracking_avg_damage in decision_tree_strategies:
+            f.write(f"| {label} | {avg_damage:.2f} | {avg_leaps:.2f} | {first_leap:.2f} | {tracking_rate['pair']:.2f} | {tracking_rate['condition']:.2f} | {tracking_rate['reroll_all']:.2f} | {tracking_avg_damage['pair_avg']:.2f} | {tracking_avg_damage['condition_avg']:.2f} |\n")
 
     print("\nResults saved to results.md\n")
 
