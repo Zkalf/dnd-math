@@ -1,0 +1,443 @@
+{
+    "simple_strategies": [
+        [
+            "Reroll none",
+            17.097182,
+            0.296951,
+            0.389395,
+            0.550393,
+            0.050017,
+            {
+                "pair": 0.389395,
+                "condition": 0.160998,
+                "reroll_all": 0.0
+            },
+            {
+                "pair_avg_damage": 35.85909680401649,
+                "condition_avg_damage": 19.465018198983838,
+                "reroll_all_avg_damage": 0
+            },
+            {
+                "pair_avg_leaps": 0.7625958217234428,
+                "condition_avg_leaps": 0.0,
+                "reroll_all_avg_leaps": 0
+            }
+        ],
+        [
+            "Keep 2",
+            18.47946,
+            0.387965,
+            0.508717,
+            0.550551,
+            0.049787,
+            {
+                "pair": 0.389683,
+                "condition": 0.11686,
+                "reroll_all": 0.044008
+            },
+            {
+                "pair_avg_damage": 35.890662410215484,
+                "condition_avg_damage": 27.528589765531404,
+                "reroll_all_avg_damage": 29.005817124159243
+            },
+            {
+                "pair_avg_leaps": 0.763297346817798,
+                "condition_avg_leaps": 0.5786838952592847,
+                "reroll_all_avg_leaps": 0.520269041992365
+            }
+        ],
+        [
+            "Reroll all",
+            18.644174,
+            0.381047,
+            0.498102,
+            0.550088,
+            0.050204,
+            {
+                "pair": 0.389308,
+                "condition": 0.16078,
+                "reroll_all": 0.16078
+            },
+            {
+                "pair_avg_damage": 35.9453645956415,
+                "condition_avg_damage": 28.923721855952234,
+                "reroll_all_avg_damage": 28.923721855952234
+            },
+            {
+                "pair_avg_leaps": 0.7648776803970121,
+                "condition_avg_leaps": 0.5179375544221918,
+                "reroll_all_avg_leaps": 0.5179375544221918
+            }
+        ],
+        [
+            "Keep 2 or 8",
+            18.679417,
+            0.38351,
+            0.50289,
+            0.549768,
+            0.050248,
+            {
+                "pair": 0.388765,
+                "condition": 0.146288,
+                "reroll_all": 0.014715
+            },
+            {
+                "pair_avg_damage": 35.907736035908584,
+                "condition_avg_damage": 29.342707535819752,
+                "reroll_all_avg_damage": 29.035677879714576
+            },
+            {
+                "pair_avg_leaps": 0.7629956400396126,
+                "condition_avg_leaps": 0.5412747457070983,
+                "reroll_all_avg_leaps": 0.5234114848793748
+            }
+        ],
+        [
+            "Keep 2 and 7 and 8",
+            18.627571,
+            0.376937,
+            0.494305,
+            0.550179,
+            0.049968,
+            {
+                "pair": 0.388906,
+                "condition": 0.023229,
+                "reroll_all": 0.138044
+            },
+            {
+                "pair_avg_damage": 35.881966336338344,
+                "condition_avg_damage": 29.40281544620948,
+                "reroll_all_avg_damage": 28.90282083973226
+            },
+            {
+                "pair_avg_leaps": 0.7633566980195728,
+                "condition_avg_leaps": 0.3855525420810194,
+                "reroll_all_avg_leaps": 0.5151038799223436
+            }
+        ],
+        [
+            "Keep 2 and 8",
+            18.636045,
+            0.379815,
+            0.497795,
+            0.549182,
+            0.049917,
+            {
+                "pair": 0.388138,
+                "condition": 0.058185,
+                "reroll_all": 0.102859
+            },
+            {
+                "pair_avg_damage": 35.891002684612175,
+                "condition_avg_damage": 29.725977485606254,
+                "reroll_all_avg_damage": 28.930642918947296
+            },
+            {
+                "pair_avg_leaps": 0.7637360938635228,
+                "condition_avg_leaps": 0.5194981524447881,
+                "reroll_all_avg_leaps": 0.5167559474620597
+            }
+        ],
+        [
+            "Keep 2 or 7 or 8",
+            18.750339,
+            0.377049,
+            0.494413,
+            0.550421,
+            0.050027,
+            {
+                "pair": 0.389123,
+                "condition": 0.158372,
+                "reroll_all": 0.002926
+            },
+            {
+                "pair_avg_damage": 35.849345836663474,
+                "condition_avg_damage": 29.785182986891623,
+                "reroll_all_avg_damage": 28.50136705399863
+            },
+            {
+                "pair_avg_leaps": 0.7625198202110901,
+                "condition_avg_leaps": 0.4981751824817518,
+                "reroll_all_avg_leaps": 0.4914559125085441
+            }
+        ],
+        [
+            "Keep 6",
+            18.707046,
+            0.378448,
+            0.495694,
+            0.550088,
+            0.049893,
+            {
+                "pair": 0.388969,
+                "condition": 0.088248,
+                "reroll_all": 0.072871
+            },
+            {
+                "pair_avg_damage": 35.87027500906242,
+                "condition_avg_damage": 29.937109056295892,
+                "reroll_all_avg_damage": 28.99275431927653
+            },
+            {
+                "pair_avg_leaps": 0.7624412228223844,
+                "condition_avg_leaps": 0.49844755688514186,
+                "reroll_all_avg_leaps": 0.5200285435907288
+            }
+        ],
+        [
+            "Keep 7",
+            18.839946,
+            0.379968,
+            0.496124,
+            0.550359,
+            0.05003,
+            {
+                "pair": 0.389636,
+                "condition": 0.087674,
+                "reroll_all": 0.073049
+            },
+            {
+                "pair_avg_damage": 35.950014885688184,
+                "condition_avg_damage": 30.904315988776606,
+                "reroll_all_avg_damage": 29.062971430135935
+            },
+            {
+                "pair_avg_leaps": 0.7655812091285199,
+                "condition_avg_leaps": 0.4952665556493373,
+                "reroll_all_avg_leaps": 0.5235937521389752
+            }
+        ],
+        [
+            "Keep 6 or 7 or 8",
+            19.039831,
+            0.369227,
+            0.483406,
+            0.550739,
+            0.050273,
+            {
+                "pair": 0.389408,
+                "condition": 0.155509,
+                "reroll_all": 0.005822
+            },
+            {
+                "pair_avg_damage": 35.902857671131564,
+                "condition_avg_damage": 31.43249586840633,
+                "reroll_all_avg_damage": 29.360185503263484
+            },
+            {
+                "pair_avg_leaps": 0.7639930355822171,
+                "condition_avg_leaps": 0.44102270608132005,
+                "reroll_all_avg_leaps": 0.539161800068705
+            }
+        ],
+        [
+            "Keep 6 and 7 and 8",
+            18.692359,
+            0.377779,
+            0.4948,
+            0.550832,
+            0.049947,
+            {
+                "pair": 0.389996,
+                "condition": 0.014543,
+                "reroll_all": 0.146293
+            },
+            {
+                "pair_avg_damage": 35.915973497164075,
+                "condition_avg_damage": 31.650140961287217,
+                "reroll_all_avg_damage": 28.880295024368902
+            },
+            {
+                "pair_avg_leaps": 0.7647924594098401,
+                "condition_avg_leaps": 0.294093378257581,
+                "reroll_all_avg_leaps": 0.5142829800468922
+            }
+        ],
+        [
+            "Keep 7 or 8",
+            18.997839,
+            0.374117,
+            0.489629,
+            0.549389,
+            0.049965,
+            {
+                "pair": 0.387716,
+                "condition": 0.135199,
+                "reroll_all": 0.026474
+            },
+            {
+                "pair_avg_damage": 35.92841667612376,
+                "condition_avg_damage": 31.787957011516358,
+                "reroll_all_avg_damage": 29.089559567877917
+            },
+            {
+                "pair_avg_leaps": 0.7639947796840987,
+                "condition_avg_leaps": 0.4733466963513044,
+                "reroll_all_avg_leaps": 0.5253456221198156
+            }
+        ],
+        [
+            "Keep 8",
+            18.870097,
+            0.378004,
+            0.495255,
+            0.54969,
+            0.049969,
+            {
+                "pair": 0.389293,
+                "condition": 0.087626,
+                "reroll_all": 0.072771
+            },
+            {
+                "pair_avg_damage": 35.891649734261854,
+                "condition_avg_damage": 31.8882865816082,
+                "reroll_all_avg_damage": 28.905553036236963
+            },
+            {
+                "pair_avg_leaps": 0.762965170193145,
+                "condition_avg_leaps": 0.49520690206103213,
+                "reroll_all_avg_leaps": 0.516606890107323
+            }
+        ],
+        [
+            "Keep 7 and 8",
+            18.841258,
+            0.378211,
+            0.494323,
+            0.550745,
+            0.050252,
+            {
+                "pair": 0.389063,
+                "condition": 0.041447,
+                "reroll_all": 0.120235
+            },
+            {
+                "pair_avg_damage": 35.9526786150315,
+                "condition_avg_damage": 32.895360339710955,
+                "reroll_all_avg_damage": 29.02638166923109
+            },
+            {
+                "pair_avg_leaps": 0.7656574899180852,
+                "condition_avg_leaps": 0.4285231741742466,
+                "reroll_all_avg_leaps": 0.5203227013764711
+            }
+        ]
+    ],
+    "decision_tree_strategies": [
+        [
+            "Decision Tree1",
+            18.760294,
+            0.379993,
+            0.498345,
+            0.549881,
+            0.050079,
+            {
+                "pair": 0.389293,
+                "condition": 0.14613,
+                "reroll_all": 0.014458
+            },
+            {
+                "pair_avg_damage": 35.842131761937665,
+                "condition_avg_damage": 30.021049750222403,
+                "reroll_all_avg_damage": 29.065361737446395
+            },
+            {
+                "pair_avg_leaps": 0.7618528974320113,
+                "condition_avg_leaps": 0.518969410798604,
+                "reroll_all_avg_leaps": 0.5237238898879513
+            }
+        ],
+        [
+            "Decision Tree3",
+            19.010321,
+            0.374039,
+            0.490465,
+            0.54986,
+            0.049897,
+            {
+                "pair": 0.388794,
+                "condition": 0.161066,
+                "reroll_all": 0.0
+            },
+            {
+                "pair_avg_damage": 35.851790408288196,
+                "condition_avg_damage": 31.486223039002645,
+                "reroll_all_avg_damage": 0
+            },
+            {
+                "pair_avg_leaps": 0.7615343858187112,
+                "condition_avg_leaps": 0.48401897358846685,
+                "reroll_all_avg_leaps": 0
+            }
+        ],
+        [
+            "Decision Tree2",
+            19.02703,
+            0.373871,
+            0.489662,
+            0.549704,
+            0.050188,
+            {
+                "pair": 0.389192,
+                "condition": 0.154676,
+                "reroll_all": 0.005836
+            },
+            {
+                "pair_avg_damage": 35.90659623013834,
+                "condition_avg_damage": 31.573502030049912,
+                "reroll_all_avg_damage": 28.925119945167925
+            },
+            {
+                "pair_avg_leaps": 0.7638080947193159,
+                "condition_avg_leaps": 0.47548423802011947,
+                "reroll_all_avg_leaps": 0.5238176833447566
+            }
+        ],
+        [
+            "Decision Tree5",
+            19.033034,
+            0.374817,
+            0.489532,
+            0.549372,
+            0.049998,
+            {
+                "pair": 0.388861,
+                "condition": 0.154586,
+                "reroll_all": 0.005925
+            },
+            {
+                "pair_avg_damage": 35.956848333980524,
+                "condition_avg_damage": 31.573286067302345,
+                "reroll_all_avg_damage": 28.69704641350211
+            },
+            {
+                "pair_avg_leaps": 0.7659292137807597,
+                "condition_avg_leaps": 0.4784003726081275,
+                "reroll_all_avg_leaps": 0.510210970464135
+            }
+        ],
+        [
+            "Decision Tree4",
+            19.057537,
+            0.374822,
+            0.489605,
+            0.550142,
+            0.050179,
+            {
+                "pair": 0.38897,
+                "condition": 0.155318,
+                "reroll_all": 0.005854
+            },
+            {
+                "pair_avg_damage": 35.94486978430213,
+                "condition_avg_damage": 31.580447855367698,
+                "reroll_all_avg_damage": 29.219166381961053
+            },
+            {
+                "pair_avg_leaps": 0.7649741625318148,
+                "condition_avg_leaps": 0.47759435480755613,
+                "reroll_all_avg_leaps": 0.52801503245644
+            }
+        ]
+    ]
+}

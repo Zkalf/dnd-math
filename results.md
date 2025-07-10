@@ -1,36 +1,42 @@
-Simulating Chromatic Orb (Spell level 2, on 3 targets, Elemental Adept, Empowered Spell +4).
+# Simulating Chromatic Orb
 
-For all strategies:
+- Simulations = 1000000
+- Proficiency bonus = 3
+- Charisma modifier = 4
+- Spell attack bonus = 7
+- Armor class = 17
+- Spell level = 2
+- Targets = 3
+- Elemental Adept = Yes
+- Hit % = 0.55
+- Crit % = 0.05
+- Pair condition + Strategy condition + Reroll all condition = Hit %
 
-- if has pair -> skip reroll
-- if condition triggered -> keep specific dice and reroll remaining
-- else -> reroll all lowest dice
+## Simple Strategies (sorted by 'Strategy condition avg damage' ascending)
 
-## Simple Strategies (sorted by condition damage ascending)
+| Strategy | Avg damage | Avg leaps | Pair condition % | Strategy condition % | Reroll all condition % | Strategy condition avg damage | Strategy condition avg leaps |
+|---|---|---|---|---|---|---|---|
+| Reroll none | 17.10 | 0.30 | 0.39 | 0.16 | 0.00 | 19.47 | 0.00 |
+| Keep 2 | 18.48 | 0.39 | 0.39 | 0.12 | 0.04 | 27.53 | 0.58 |
+| Reroll all | 18.64 | 0.38 | 0.39 | 0.16 | 0.16 | 28.92 | 0.52 |
+| Keep 2 or 8 | 18.68 | 0.38 | 0.39 | 0.15 | 0.01 | 29.34 | 0.54 |
+| Keep 2 and 7 and 8 | 18.63 | 0.38 | 0.39 | 0.02 | 0.14 | 29.40 | 0.39 |
+| Keep 2 and 8 | 18.64 | 0.38 | 0.39 | 0.06 | 0.10 | 29.73 | 0.52 |
+| Keep 2 or 7 or 8 | 18.75 | 0.38 | 0.39 | 0.16 | 0.00 | 29.79 | 0.50 |
+| Keep 6 | 18.71 | 0.38 | 0.39 | 0.09 | 0.07 | 29.94 | 0.50 |
+| Keep 7 | 18.84 | 0.38 | 0.39 | 0.09 | 0.07 | 30.90 | 0.50 |
+| Keep 6 or 7 or 8 | 19.04 | 0.37 | 0.39 | 0.16 | 0.01 | 31.43 | 0.44 |
+| Keep 6 and 7 and 8 | 18.69 | 0.38 | 0.39 | 0.01 | 0.15 | 31.65 | 0.29 |
+| Keep 7 or 8 | 19.00 | 0.37 | 0.39 | 0.14 | 0.03 | 31.79 | 0.47 |
+| Keep 8 | 18.87 | 0.38 | 0.39 | 0.09 | 0.07 | 31.89 | 0.50 |
+| Keep 7 and 8 | 18.84 | 0.38 | 0.39 | 0.04 | 0.12 | 32.90 | 0.43 |
 
-| Simulation name | Avg damage | Avg leaps | First leap % | Has pair % | Condition % | Reroll all % | Pair dmg | Condition dmg | Reroll dmg |
-|---|---|---|---|---|---|---|---|---|---|
-| Reroll none | 39.52 | 1.14 | 0.68 | 0.68 | 0.00 | 0.00 | 49.09 | 0.00 | 0.00 |
-| Keep 2 and 7 and 8 | 45.89 | 1.49 | 0.89 | 0.68 | 0.05 | 0.28 | 49.07 | 37.16 | 39.56 |
-| Keep 6 and 7 and 8 | 45.94 | 1.49 | 0.89 | 0.68 | 0.03 | 0.29 | 49.08 | 37.38 | 39.51 |
-| Reroll all | 46.01 | 1.50 | 0.90 | 0.68 | 0.32 | 0.00 | 49.08 | 39.54 | 0.00 |
-| Keep 2 | 46.04 | 1.54 | 0.92 | 0.68 | 0.23 | 0.09 | 49.08 | 39.64 | 39.55 |
-| Keep 6 | 46.10 | 1.50 | 0.89 | 0.68 | 0.18 | 0.15 | 49.09 | 40.00 | 39.55 |
-| Keep 2 or 7 or 8 | 46.15 | 1.49 | 0.89 | 0.68 | 0.32 | 0.01 | 49.08 | 40.00 | 39.46 |
-| Keep 2 or 8 | 46.30 | 1.52 | 0.91 | 0.68 | 0.29 | 0.03 | 49.11 | 40.49 | 39.47 |
-| Keep 6 or 7 or 8 | 46.32 | 1.45 | 0.87 | 0.68 | 0.31 | 0.01 | 49.09 | 40.53 | 39.60 |
-| Keep 2 and 8 | 46.15 | 1.51 | 0.90 | 0.68 | 0.12 | 0.21 | 49.10 | 40.61 | 39.57 |
-| Keep 7 | 46.26 | 1.49 | 0.89 | 0.68 | 0.18 | 0.15 | 49.07 | 41.07 | 39.46 |
-| Keep 7 or 8 | 46.57 | 1.48 | 0.88 | 0.68 | 0.27 | 0.05 | 49.09 | 41.57 | 39.65 |
-| Keep 7 and 8 | 46.16 | 1.49 | 0.89 | 0.68 | 0.08 | 0.24 | 49.07 | 41.69 | 39.47 |
-| Keep 8 | 46.45 | 1.50 | 0.89 | 0.68 | 0.18 | 0.15 | 49.10 | 41.98 | 39.54 |
+## Decision Tree Strategies (sorted by 'Avg damage' ascending)
 
-## Decision Tree Strategies (sorted by average damage ascending)
-
-| Simulation name | Avg damage | Avg leaps | First leap % | Has pair % | Condition % | Reroll all % | Pair dmg | Condition dmg | Reroll dmg |
-|---|---|---|---|---|---|---|---|---|---|
-| Decision Tree1 | 46.33 | 1.50 | 0.90 | 0.68 | 0.29 | 0.03 | 49.08 | 40.64 | 39.51 |
-| Decision Tree2 | 46.56 | 1.48 | 0.88 | 0.68 | 0.31 | 0.01 | 49.07 | 41.36 | 39.48 |
-| Decision Tree5 | 46.57 | 1.48 | 0.88 | 0.68 | 0.31 | 0.01 | 49.08 | 41.36 | 39.50 |
-| Decision Tree4 | 46.58 | 1.48 | 0.88 | 0.68 | 0.31 | 0.01 | 49.08 | 41.38 | 39.75 |
-| Decision Tree3 | 46.59 | 1.48 | 0.88 | 0.68 | 0.32 | 0.00 | 49.09 | 41.32 | 0.00 |
+| Strategy | Avg damage | Avg leaps | Pair condition % | Strategy condition % | Reroll all condition % | Strategy condition avg damage | Strategy condition avg leaps |
+|---|---|---|---|---|---|---|---|
+| Decision Tree1 | 18.76 | 0.38 | 0.39 | 0.15 | 0.01 | 30.02 | 0.52 |
+| Decision Tree3 | 19.01 | 0.37 | 0.39 | 0.16 | 0.00 | 31.49 | 0.48 |
+| Decision Tree2 | 19.03 | 0.37 | 0.39 | 0.15 | 0.01 | 31.57 | 0.48 |
+| Decision Tree5 | 19.03 | 0.37 | 0.39 | 0.15 | 0.01 | 31.57 | 0.48 |
+| Decision Tree4 | 19.06 | 0.37 | 0.39 | 0.16 | 0.01 | 31.58 | 0.48 |
