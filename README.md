@@ -6,4 +6,4 @@
 
 What is the optimal reroll strategy for Chromatic Orb?
 
-See latest [result](results.md).
+See latest [results](results.md).
